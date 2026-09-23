@@ -29,9 +29,9 @@ export function TravelChat({
   className,
   compact = false,
 }: {
-  initialQuestion?: string;
-  className?: string;
-  compact?: boolean;
+  initialQuestion?: string | undefined;
+  className?: string | undefined;
+  compact?: boolean | undefined;
 }) {
   const transport = useMemo(() => new DefaultChatTransport({ api: "/api/chat" }), []);
   const [chatKey, setChatKey] = useState(0);

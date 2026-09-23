@@ -3,12 +3,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site-layout";
 import { TravelChat } from "@/components/travel-chat";
 
-type ChatSearch = { q?: string };
+type ChatSearch = { q?: string | undefined };
 
 export const Route = createFileRoute("/chat")({
-  validateSearch: (search: Record<string, unknown>): ChatSearch => ({
-    q: typeof search.q === "string" && search.q.trim() ? search.q.trim() : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): ChatSearch => {
+    const raw = search["q"];
+    return { q: typeof raw === "string" && raw.trim() ? raw.trim() : undefined };
+  },
   head: () => ({
     meta: [
       { title: "AI Chat — Mzansi Travel AI" },
